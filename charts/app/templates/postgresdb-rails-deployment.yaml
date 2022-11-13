@@ -17,6 +17,7 @@ spec:
         app: postgres-rails
     spec:
       containers:
+        - image: postgres
           image: "{{ .Values.postgresdb.image.repository }}:{{ .Values.postgresdb.image.tag }}"
           name: postgres-rails
           env:
