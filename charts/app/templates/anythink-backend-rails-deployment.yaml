@@ -2,35 +2,35 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: anythink-backend-node
-  name: anythink-backend-node
+    app: anythink-backend-rails
+  name: anythink-backend-rails
 spec:
   replicas: {{ .Values.backend.replicaCount }}
   selector:
     matchLabels:
-      app: anythink-backend-node
+      app: anythink-backend-rails
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: anythink-backend-node
+        app: anythink-backend-rails
     spec:
       containers:
         - args:
             - sh
             - -c
-            - /wait-for-it.sh mongodb-node:27017 -q -t 60 && yarn dev
+            - /wait-for-it.sh postgres-rails:5432 -q -t 60 && rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid
           env:
-            - name: MONGODB_URI
-              value: mongodb://mongodb-node:27017/anythink-market
-            - name: NODE_ENV
+            - name: DATABASE_URL
+              value: postgres://user:@postgres-rails:5432
+            - name: RAILS_ENV
               value: development
             - name: PORT
               value: "3000"
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
-          name: anythink-backend-node
+          name: anythink-backend-rails
           ports:
             - containerPort: 3000
               name: http  

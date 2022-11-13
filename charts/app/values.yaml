@@ -34,13 +34,13 @@ frontend:
       cpu: 100m
       memory: 128Mi
 
-mongodb:
+postgresdb:
   replicaCount: 1
   service:
     type: ClusterIP
     port: 80
   image:
-    repository: mongo
+    repository: postgres
     pullPolicy: IfNotPresent
     tag: "latest"
   resources:
