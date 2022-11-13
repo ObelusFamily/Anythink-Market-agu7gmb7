@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ruby:2.7.5
+FROM ruby:2.7.5
 
 RUN apt-get update -qq && apt-get install -y build-essential nodejs
 
@@ -6,6 +6,10 @@ ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.s
 
 RUN chmod +x /wait-for-it.sh
 
+WORKDIR /usr/src
+COPY . .
+
+# Pre-install gems
 WORKDIR /usr/src/backend
 RUN bundle install
 
