@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - k8s
+      - aws-poc
 
 jobs:
   build-backend:
