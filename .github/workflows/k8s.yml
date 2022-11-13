@@ -74,6 +74,7 @@ jobs:
   deploy:
     name: Deploy latest tag using helm
     runs-on: ubuntu-20.04
+    environment: production
     needs:
       - build-frontend
       - build-backend
