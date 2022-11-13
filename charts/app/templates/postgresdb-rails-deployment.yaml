@@ -17,9 +17,15 @@ spec:
         app: postgres-rails
     spec:
       containers:
-        - image: postgres
           image: "{{ .Values.postgresdb.image.repository }}:{{ .Values.postgresdb.image.tag }}"
           name: postgres-rails
+          env:
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: trust
+            - name: POSTGRES_USER
+              value: user
+            - name: POSTGRES_PASSWORD
+              value: password
           imagePullPolicy: {{ .Values.postgresdb.image.pullPolicy }}
           ports:
             - containerPort: 5433
