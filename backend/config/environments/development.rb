@@ -10,6 +10,7 @@ Rails.application.configure do
   config.eager_load = false
 
   # Allow codespace host
+  config.hosts << ".anythink.market"
   config.hosts << ".#{ENV['GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN']}"
 
   # Show full error reports.
