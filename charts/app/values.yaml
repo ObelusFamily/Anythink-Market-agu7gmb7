@@ -1,4 +1,6 @@
 backend:
+  serviceName: anythink-backend
+  containerPort: 3000
   replicaCount: 1
   service:
     type: ClusterIP
@@ -17,6 +19,8 @@ backend:
       memory: 128Mi
 
 frontend:
+  serviceName: anythink-frontend
+  containerPort: 3001
   replicaCount: 1
   service:
     type: ClusterIP
@@ -34,8 +38,14 @@ frontend:
       cpu: 100m
       memory: 128Mi
 
-postgresdb:
+database:
+  connectionProtocol: postgres://
+  serviceName: postgres-rails
+  containerPort: 5433
   replicaCount: 1
+  env:
+    userName: user
+    password: password
   service:
     type: ClusterIP
     port: 80

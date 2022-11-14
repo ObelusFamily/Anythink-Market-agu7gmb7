@@ -45,6 +45,6 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
     volumes:
-      - ~/posgres/data:/data/db
+      - ~/postgres/data:/data/db
     ports:
       - '5433:5432'
