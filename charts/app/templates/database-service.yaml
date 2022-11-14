@@ -6,8 +6,8 @@ metadata:
   name: {{ .Values.database.serviceName }}
 spec:
   ports:
-    - name: "{{ .Values.database.containerPort }}"
-      port: {{ .Values.database.containerPort }}
-      targetPort: {{ .Values.database.containerPort }}
+    - name: "{{ .Values.database.servicePort }}"
+      port: {{ .Values.database.servicePort }}
+      targetPort: {{ .Values.database.servicePort }}
   selector:
     app: {{ .Values.database.serviceName }}
