@@ -41,7 +41,7 @@ frontend:
 database:
   connectionProtocol: postgres://
   serviceName: postgres-rails
-  containerPort: 5433
+  containerPort: 5432
   replicaCount: 1
   env:
     userName: user
