@@ -3,7 +3,7 @@ kind: Job
 metadata:
   labels:
     app: {{ .Values.database.serviceName }}-migration-job
-    name: {{ .Values.database.serviceName }}-migration-job
+  name: {{ .Values.database.serviceName }}-migration-job
 spec:
   template:
     metadata:
