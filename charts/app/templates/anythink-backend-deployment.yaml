@@ -51,4 +51,19 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
+      initContainers:
+        - command:
+            - exec
+            - rails
+            - db:migrate
+          env:
+            - name: DATABASE_URL
+              value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.userName}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}"
+            - name: RAILS_ENV
+              value: development
+            - name: PORT
+              value: "{{ .Values.backend.containerPort }}"
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          name: db-migrations
       restartPolicy: Always
