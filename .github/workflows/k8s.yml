@@ -23,7 +23,7 @@ jobs:
     name: Build backend image
     runs-on: ubuntu-20.04
     needs: [check-secret]
-    if: needs.check-secret.outputs.creds-defined == 'true'
+    if: needs.check-secret.outputs.creds-defined
     environment: Production
     steps:
       - name: Checkout
@@ -58,7 +58,7 @@ jobs:
     name: Build frontend images
     runs-on: ubuntu-20.04
     needs: [check-secret]
-    if: needs.check-secret.outputs.creds-defined == 'true'
+    if: needs.check-secret.outputs.creds-defined
     environment: Production
     steps:
       - name: Checkout
