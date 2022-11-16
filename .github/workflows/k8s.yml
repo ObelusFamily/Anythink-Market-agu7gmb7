@@ -13,11 +13,11 @@ jobs:
       creds-defined: ${{ steps.creds-defined.outputs.defined }}
     steps:
       - id: creds-defined
-        secrets:
+        if: "${{ env.AWS_ACCESS_KEY_ID != '' && env.AWS_SECRET_ACCESS_KEY != '' }}"
+        run: echo "::set-output name=defined::true"
+        env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        if: "${{ secrets.AWS_ACCESS_KEY_ID != '' && secrets.AWS_SECRET_ACCESS_KEY != '' }}"
-        run: echo "::set-output name=defined::true"
 
   build-backend:
     name: Build backend image
