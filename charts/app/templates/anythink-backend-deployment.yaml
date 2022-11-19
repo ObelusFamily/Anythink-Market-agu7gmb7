@@ -18,9 +18,12 @@ spec:
     spec:
       containers:
         - args:
-            - sh
-            - -c
-            - "rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"
+{{/*            - sh*/}}
+{{/*            - -c*/}}
+{{/*            - "rm -f /tmp/server.pid && exec rails s -b 0.0.0.0 --pid /tmp/server.pid"*/}}
+            - tail
+            - "-f"
+            - /dev/null
           env:
             - name: DATABASE_URL
               value: "{{ .Values.database.connectionProtocol}}{{ .Values.database.env.userName}}:@{{ .Values.database.serviceName }}:{{ .Values.database.servicePort }}"
